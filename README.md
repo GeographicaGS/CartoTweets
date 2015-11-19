@@ -42,20 +42,18 @@ docker run \
  -it "cartotweets"
 ```
 
-I know, that's a huge command to write by hand in the console, just filling parameter by
-parameter. And to make it worst, those are not all options that you can pass to the continer.
+I know, that's a huge command to write by hand in the console, filling parameter by
+parameter... And to make it worse, those are not all options that you can pass to the continer.
 
 Well, that's why both the **config.cnf** file and the **run.sh** script exists. Just
 take a look at them and you will understand it right away.
 
-So a better way to run the docker is by filling the parameters in the *config.cnf* file and
-then run:
+So a better way to run the docker after the build command, is by filling the parameters in the *config.cnf* file 
+and then run:
 
 ```bash
 chmod +x run.sh #if it doesn't have it already...
 ./run.sh
 ```
 
-Then hopefully you'll see the output of the docker while the node module is getting
-a lot of tweets into a **tweets** dataset on CartoDB. As a note, sometimes it takes a few
-minutes to appear in the CartoDB web interface.
+Then hopefully you'll see the output of the docker while the node module is getting a lot of tweets into a **tweets** dataset on your CartoDB account. As a note, sometimes it takes a few minutes to appear in the CartoDB web interface.
