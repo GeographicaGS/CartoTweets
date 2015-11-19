@@ -13,15 +13,11 @@ First you need:
 
 * A Twitter account:
 
- Well probably you already have a Twitter Account, so then you'll have to go to
- [apps.twitter.com](https://apps.twitter.com) page and create a Twitter App.
+ Well probably you already have a Twitter Account, so then you'll have to go to  [apps.twitter.com](https://apps.twitter.com) page and create a Twitter App.
 
- Follow the instructions and finally you'll be able to access to a **Keys and Access Tokens**
- section in your App settings page.
+ Follow the instructions and finally you'll be able to access to a **Keys and Access Tokens** section in your App settings page.
 
- There you'll have a **Application Settins** block, which
- corresponds to the **TWITTER_CONSUMER** *Key* and *Secret* strings, and **Your Access Token**
- block with the **TWITTER_TOKEN** *key* and *Secret* strings. That's all you need to connect your app to the Twitter API.
+ There you'll have a **Application Settins** block, which corresponds to the **TWITTER_CONSUMER** *Key* and *Secret* strings, and **Your Access Token** block with the **TWITTER_TOKEN** *key* and *Secret* strings. That's all you need to connect your app to the Twitter API.
 
 Once you have your credentials, just build the docker:
 
@@ -42,11 +38,9 @@ docker run \
  -it "cartotweets"
 ```
 
-I know, that's a huge command to write by hand in the console, filling parameter by
-parameter... And to make it worse, those are not all options that you can pass to the continer.
+I know, that's a huge command to write by hand in the console, filling parameter by parameter... And to make it worse, those are not all options that you can pass to the docker container.
 
-Well, that's why both the **config.cnf** file and the **run.sh** script exists. Just
-take a look at them and you will understand it right away.
+Well, that's why both the **config.cnf** file and the **run.sh** script exists. Just take a look at them and you will understand it right away.
 
 So a better way to run the docker after the build command, is by filling the parameters in the *config.cnf* file 
 and then run:
