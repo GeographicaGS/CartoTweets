@@ -6,13 +6,22 @@ Quick Start
 
 First you need:
 
-* A CartoDB account:
+* A CartoDB user and API Key:
 
- TODO: get CartoDB apikey instructions
+ Sing Up or Login in [CartoDB](https://cartodb.com/), and then go to the **Your API Keys**
+ option in your user menu to get the key string.
 
 * A Twitter account:
 
- TODO: get Twitter necessary KEYs and SECRETs instructions
+ Well probably you already have a Twitter Account, so then you'll have to go to
+ [apps.twitter.com](https://apps.twitter.com) page and create a Twitter App.
+
+ Follow the instructions and finally you'll be able to access to a **Keys and Access Tokens**
+ section in your App settings page.
+
+ There you'll have a **Application Settins** block, which
+ corresponds to the **TWITTER_CONSUMER** *Key* and *Secret* strings, and **Your Access Token**
+ block with the **TWITTER_TOKEN** *key* and *Secret* strings. That's all you need to connect your app to the Twitter API.
 
 Once you have your credentials, just build the docker:
 
@@ -32,3 +41,21 @@ docker run \
     -e CARTODB_APIKEY=<your_cartodb_apikey> \
  -it "cartotweets"
 ```
+
+I know, that's a huge command to write by hand in the console, just filling parameter by
+parameter. And to make it worst, those are not all options that you can pass to the continer.
+
+Well, that's why both the **config.cnf** file and the **run.sh** script exists. Just
+take a look at them and you will understand it right away.
+
+So a better way to run the docker is by filling the parameters in the *config.cnf* file and
+then run:
+
+```bash
+chmod +x run.sh #if it doesn't have it already...
+./run.sh
+```
+
+Then hopefully you'll see the output of the docker while the node module is getting
+a lot of tweets into a **tweets** dataset on CartoDB. As a note, sometimes it takes a few
+minutes to appear in the CartoDB web interface.
