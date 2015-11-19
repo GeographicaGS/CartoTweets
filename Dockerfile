@@ -1,6 +1,6 @@
 FROM nodesource/trusty:0.10.30
 
-ADD gettweets /app
+ADD cartotweets /app
 ADD init /init
 
 RUN	cd /app && \

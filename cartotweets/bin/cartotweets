@@ -5,16 +5,24 @@ var argv = require('yargs').argv;
 var db = require("../db/db");
 
 l.setLevel(CONFIG.log_level);
+var locations = '';
+var hashtags = '';
 
-if(typeof argv.hashtags == 'undefined') {
-    console.log('Usage: %s --hashtags=tag1,tag2,...', argv["$0"]);
-    return;
+//Getting params:
+if (argv.hashtags) {
+    var hashtags = argv.hashtags.trim();
+}
+if (argv.locations) {
+    var locations = argv.locations.trim();
 }
 
-var hashtags = argv.hashtags;//.split(',').map(function(tag){return '#'+tag});
-var tags_array = (hashtags.length > 0)?hashtags.split(','):[];
-var locations = argv.locations;
+//Twitter API needs at least one filter, so let's give it a good one by default:
+if (!hashtags && !locations) {
+    locations = '-180,-90,180,90'; //world-wide
+}
 
+//A useful hashtags format:
+var tags_array = (hashtags.length > 0)?hashtags.split(','):[];
 tags_array = tags_array.map(function(tag){return tag.toLowerCase()});
 
 db.init(function(err){
@@ -26,12 +34,11 @@ db.init(function(err){
     //  Spain: -18.160788,27.637894,4.327784,43.791322
     //  World-wide: -180,-90,180,90
     var stream_options = {};
-
-    if (locations !== '' ){
-        stream_options.locations = locations;
-    }
     if (hashtags !== '') {
         stream_options.track = hashtags;
+    }
+    if (locations !== '' ){
+        stream_options.locations = locations;
     }
 
     var TweetStream = require('../lib/TweetStream');
