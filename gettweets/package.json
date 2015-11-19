@@ -1,9 +1,9 @@
 {
-    "name": "get-tweets-to-cartodb",
+    "name": "cartotweets",
     "version": "0.0.1",
     "description": "Import tweets to CartoDB.",
     "author": "Geographica.gs",
-    "main": "./bin/gettweets",
+    "main": "./bin/cartotweets",
     "dependencies": {
         "twitter": "~1.2.5",
         "yargs": "~3.21.0",

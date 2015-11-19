@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t "gettweets" .
+docker build -t "cartotweets" .

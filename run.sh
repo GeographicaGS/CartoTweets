@@ -14,4 +14,4 @@ docker run \
 	-e TWITTER_TOKEN_SECRET=$twitter_token_secret \
 	-e CARTODB_USER=$cartodb_user \
 	-e CARTODB_APIKEY=$cartodb_apikey \
- -it gettweets
+ -it "cartotweets"

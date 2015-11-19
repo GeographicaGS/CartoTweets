@@ -16,4 +16,4 @@ export CARTODB_USER=${CARTODB_USER:-""}
 export CARTODB_APIKEY=${CARTODB_APIKEY:-""}
 
 /app/bin/cdb_install
-/app/bin/gettweets --hashtags=$HASHTAGS --locations=$LOCATIONS
+/app/bin/cartotweets --hashtags=$HASHTAGS --locations=$LOCATIONS
