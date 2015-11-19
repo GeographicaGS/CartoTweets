@@ -8,14 +8,14 @@ First you need:
 
 * A CartoDB user and API Key:
 
- Sing Up or Login in [CartoDB](https://cartodb.com/), and then go to the **Your API Keys**
+ *Sing Up* or *Login* in [CartoDB](https://cartodb.com/), and then go to the **Your API Keys**
  option in your user menu to get the key string.
 
 * A Twitter account:
 
- Well probably you already have a Twitter Account, so then you'll have to go to  [apps.twitter.com](https://apps.twitter.com) page and create a Twitter App.
+ Well, probably you already have a Twitter Account (if you don't, it's [easy](https://twitter.com/), so then you'll have to go to  [apps.twitter.com](https://apps.twitter.com) page and create a Twitter App.
 
- Follow the instructions and finally you'll be able to access to a **Keys and Access Tokens** section in your App settings page.
+ Follow the instructions, and finally you'll be able to access to a **Keys and Access Tokens** section in your new App settings page.
 
  There you'll have a **Application Settins** block, which corresponds to the **TWITTER_CONSUMER** *Key* and *Secret* strings, and **Your Access Token** block with the **TWITTER_TOKEN** *key* and *Secret* strings. That's all you need to connect your app to the Twitter API.
 
@@ -25,7 +25,7 @@ Once you have your credentials, just build the docker:
 docker build -t "cartotweets" .
 ```
 
-And the run it with the proper globals defined:
+And the run it with the proper globals defined with your *Keys* and *Secrets*:
 
 ```bash
 docker run \
