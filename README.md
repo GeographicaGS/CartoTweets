@@ -13,7 +13,7 @@ First you need:
 
 * A Twitter account:
 
- Well, probably you already have a Twitter Account (if you don't, it's [easy](https://twitter.com/), so then you'll have to go to  [apps.twitter.com](https://apps.twitter.com) page and create a Twitter App.
+ Well, probably you already have a Twitter Account (if you don't, it's [easy](https://twitter.com/)), so then you'll have to go to  [apps.twitter.com](https://apps.twitter.com) page and create a Twitter App.
 
  Follow the instructions, and finally you'll be able to access to a **Keys and Access Tokens** section in your new App settings page.
 
