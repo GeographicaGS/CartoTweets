@@ -42,8 +42,8 @@ I know, that's a huge command to write by hand in the console, filling parameter
 
 Well, that's why both the **config.cnf** file and the **run.sh** script exists. Just take a look at them and you will understand it right away.
 
-So a better way to run the docker after the build command, is by filling the parameters in the *config.cnf* file 
-and then run:
+So a better way to run the docker after the build command is by filling the parameters in the *config.cnf* file 
+and then running:
 
 ```bash
 chmod +x run.sh #if it doesn't have it already...
