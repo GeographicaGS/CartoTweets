@@ -1,0 +1,30 @@
+# Hashtags: comma-separated list
+hashtags=
+
+# Bounding-box. Note: Only tweets with a valid location are inserted, except
+# when location parameter is empty, in which case all tweets are processed.
+# Locations examples:
+#	Spain: -18.160788,27.637894,4.327784,43.791322
+#	World-wide: -180,-90,180,90
+locations="-180,-90,180,90"
+
+# ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF
+log_level=DEBUG
+
+# Number of tweets for batch DB insertions
+buffer_size=100
+
+# Table name on CartoDB
+cartodb_tablename=tweets
+
+# Twitter auth config:
+twitter_consumer_key=
+twitter_consumer_secret=
+
+twitter_token_key=
+twitter_token_secret=
+
+# CartoDB auth config:
+cartodb_user=
+cartodb_apikey=
+

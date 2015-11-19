@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+var l = require('log4js').getLogger();
+var CONFIG = require('../config');
+var db = require("../db/db");
+
+l.setLevel(CONFIG.log_level);
+
+db.init(function(err){
+    if (err){
+        throw err;
+    }
+
+    l.info("Tablename: %s", CONFIG.tweets_table_name);
+
+    db.TwitterModel.createTable(function(err, data){
+        if (err) {
+            l.info(err);
+        } else {
+            l.info("Table " + CONFIG.tweets_table_name + " created on CartoDB.");
+        }
+    });
+});

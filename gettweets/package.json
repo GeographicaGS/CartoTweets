@@ -1,0 +1,15 @@
+{
+    "name": "get-tweets-to-cartodb",
+    "version": "0.0.1",
+    "description": "Import tweets to CartoDB.",
+    "author": "Geographica.gs",
+    "main": "./bin/gettweets",
+    "dependencies": {
+        "twitter": "~1.2.5",
+        "yargs": "~3.21.0",
+        "log4js": "~0.6.26",
+        "cartodb": "~0.2.1"
+    },
+    "private": true,
+    "license": "MIT"
+}

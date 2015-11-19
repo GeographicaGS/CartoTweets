@@ -1,0 +1,85 @@
+#!/usr/bin/env node
+var l = require('log4js').getLogger();
+var CONFIG = require('../config');
+var argv = require('yargs').argv;
+var db = require("../db/db");
+
+l.setLevel(CONFIG.log_level);
+
+if(typeof argv.hashtags == 'undefined') {
+    console.log('Usage: %s --hashtags=tag1,tag2,...', argv["$0"]);
+    return;
+}
+
+var hashtags = argv.hashtags;//.split(',').map(function(tag){return '#'+tag});
+var tags_array = (hashtags.length > 0)?hashtags.split(','):[];
+var locations = argv.locations;
+
+tags_array = tags_array.map(function(tag){return tag.toLowerCase()});
+
+db.init(function(err){
+    if (err){
+        throw err;
+    }
+
+    //Examples:
+    //  Spain: -18.160788,27.637894,4.327784,43.791322
+    //  World-wide: -180,-90,180,90
+    var stream_options = {};
+
+    if (locations !== '' ){
+        stream_options.locations = locations;
+    }
+    if (hashtags !== '') {
+        stream_options.track = hashtags;
+    }
+
+    var TweetStream = require('../lib/TweetStream');
+    var ts = new TweetStream(CONFIG.twitter_auth_config, stream_options);
+
+    l.info('Getting tweets...');
+    l.debug('Locations: %s', locations);
+    l.debug('Hashtags: %s', hashtags);
+    l.debug('Tablename: %s', CONFIG.tweets_table_name);
+    l.debug('Buffer size: %d', CONFIG.buffer_size);
+
+    //Start Stream API
+    var i=0;
+    var buffer = [];
+    ts.startStream(function(tweet) {
+        // Ignore tweets without valid coordinates
+        if (!locations || hasCoordinates(tweet)) {
+            //The hashtags AND location filter IS INDEED A OR FILTER!!..
+            //      so we have to look for the hashtag programatically:
+            if (tags_array.length === 0 || hasHashTags(tweet, tags_array)) {
+                buffer.push(tweet);
+                if (buffer.length >= CONFIG.buffer_size) {
+                    var tweet_array = buffer;
+                    buffer = [];
+                    db.TwitterModel.addTweets(tweet_array, function(err, data){
+                        if(err) {
+                            l.error(err);
+                        }
+                        i = i + tweet_array.length;
+                        l.info('%d tweets inserted so far', i);
+                    });
+                }
+            }
+        }
+    });
+});
+
+var hasHashTags = function(tweet, tags_array) {
+    var hashtags = tweet.entities.hashtags;
+
+    for (i in hashtags) {
+        if (tags_array.indexOf(hashtags[i].text.toLowerCase()) !== -1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+var hasCoordinates = function(tweet){
+    return (tweet.coordinates != null || (tweet.place != null && typeof tweet.place.bounding_box != 'undefined'));
+};

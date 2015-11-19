@@ -1,0 +1,19 @@
+#!/bin/bash
+
+HASHTAGS=${HASHTAGS:-""}
+LOCATIONS=${LOCATIONS:-""}
+
+export TABLENAME=${TABLENAME:-"tweets"}
+export BUFFER=${BUFFER:-"100"}
+export LOGLEVEL=${LOGLEVEL:-"DEBUG"}
+
+export TWEETER_CONSUMER_KEY=${TWEETER_CONSUMER_KEY:-""}
+export TWEETER_CONSUMER_SECRET=${TWEETER_CONSUMER_SECRET:-""}
+export TWEETER_TOKEN_KEY=${TWEETER_TOKEN_KEY:-""}
+export TWEETER_TOKEN_SECRET=${TWEETER_TOKEN_SECRET:-""}
+
+export CARTODB_USER=${CARTODB_USER:-""}
+export CARTODB_APIKEY=${CARTODB_APIKEY:-""}
+
+/app/bin/cdb_install
+/app/bin/gettweets --hashtags=$HASHTAGS --locations=$LOCATIONS
