@@ -25,7 +25,7 @@ Once you have your credentials, just build the docker:
 docker build -t "cartotweets" .
 ```
 
-And the run it with the proper globals defined with your *Keys* and *Secrets*:
+And then run it passing these globals with your *Keys* and *Secrets*:
 
 ```bash
 docker run \
