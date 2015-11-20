@@ -100,7 +100,7 @@ TwitterModel.prototype.createTable = function(callback) {
 				tweet_user_followers_count BIGINT,\
 				tweet_user_profile_image_url TEXT,\
 				tweet_text TEXT,\
-				tweet_created_at TIMESTAMP,\
+				tweet_created_at TIMESTAMP WITH TIME ZONE,\
 				tweet_retweet_count BIGINT,\
 				tweet_retweeted BOOLEAN\
 			);";
