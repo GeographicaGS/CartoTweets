@@ -65,6 +65,7 @@ Then hopefully you'll see the output of the docker while the node module is gett
 
 *Caveats:*
 * *The changes could take a few minutes to appear in the CartoDB web interface.*
+* If you use *hashtag* and *locations* filters, the Twitter API allways does an OR filter indeed, so some tweets with the hashtags could not be received, depending on the rate of tweets you're receiving due to the *locations* filter.
 
 Options
 -------
@@ -73,15 +74,11 @@ You can customize the module behavior by passing the following environment varia
 
 * HASHTAGS
 
- A coma-separated list with the hashtags to filter the tweet stream. All tweets that contains at least one of the hashtags will be inserted.
+ A coma-separated list with the hashtags to filter the tweet stream. All tweets that contains at least one of the hashtags will be inserted. Since it uses CartoDB,  **only geolocated tweets will be inserted**.
 
 * LOCATIONS
 
  Coordinates defining a [Bounding box](http://wiki.openstreetmap.org/wiki/Bounding_Box) to filter tweets by its geolocation.
-
- If you want to **store only geolocated tweets**, you should set this parameter at least with the world-wide bounding box (i.e: "-180,-90,180,90").
-
- If you want your app to store all tweets, with or without geolocation, you should set this parameter to an empty string "".
 
 * TABLENAME
 
