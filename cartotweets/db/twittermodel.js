@@ -63,32 +63,32 @@ TwitterModel.prototype.formatTweet = function(tweet){
 };
 
 TwitterModel.prototype.addTweets = function(tweets_list, callback, filter){
-    if(typeof filter != 'function'){
-        filter = function(){return true};
-    }
+	if(typeof filter != 'function'){
+		filter = function(){return true};
+	}
 
 	var values_array = [];
 	for(i in tweets_list){
-        if(filter(tweets_list[i])){
-            values_array.push(this.formatTweet(tweets_list[i]));
-        }
+		if(filter(tweets_list[i])){
+			values_array.push(this.formatTweet(tweets_list[i]));
+		}
 	}
 
 	this.batchInsert(values_array, callback);
 };
 
 TwitterModel.prototype.getTweetCoordinates = function(tweet){
-    if(tweet.coordinates != null){
-        //Returns a Point
-        tweet.coordinates.crs = {"type":"name","properties":{"name":"EPSG:4326"}};
-        return "ST_GeomFromGeoJSON('" + JSON.stringify(tweet.coordinates) + "')";
-    } else if (tweet.place != null && typeof tweet.place.bounding_box != 'undefined'){
-        //There is no Point defined, but a Polygon (place property)
-        tweet.place.bounding_box.crs = {"type":"name","properties":{"name":"EPSG:4326"}};
-        return "ST_Centroid(ST_MakeValid(ST_GeomFromGeoJSON('" + JSON.stringify(tweet.place.bounding_box) + "')))";
-    }
-    //There is no coordinates
-    return null;
+	if(tweet.coordinates != null){
+		//Returns a Point
+		tweet.coordinates.crs = {"type":"name","properties":{"name":"EPSG:4326"}};
+		return "ST_GeomFromGeoJSON('" + JSON.stringify(tweet.coordinates) + "')";
+	} else if (tweet.place != null && typeof tweet.place.bounding_box != 'undefined'){
+		//There is no Point defined, but a Polygon (place property)
+		tweet.place.bounding_box.crs = {"type":"name","properties":{"name":"EPSG:4326"}};
+		return "ST_Centroid(ST_MakeValid(ST_GeomFromGeoJSON('" + JSON.stringify(tweet.place.bounding_box) + "')))";
+	}
+	//There is no coordinates
+	return null;
 };
 
 TwitterModel.prototype.createTable = function(callback) {
@@ -100,21 +100,18 @@ TwitterModel.prototype.createTable = function(callback) {
 				tweet_user_followers_count BIGINT,\
 				tweet_user_profile_image_url TEXT,\
 				tweet_text TEXT,\
-				tweet_created_at DATE,\
+				tweet_created_at TIMESTAMP,\
 				tweet_retweet_count BIGINT,\
 				tweet_retweeted BOOLEAN\
 			);";
 	BaseModel.query(function(err, data){
-    if (CONFIG.cartodb_auth_config.multiUser=="true"){
-      l.debug('Multiuser account detected');
-      BaseModel.query(function(){}, "SELECT cdb_cartodbfytable('" + CONFIG.cartodb_auth_config.user + "','"+ CONFIG.tweets_table_name +"')");  
-    }
-    else{
-      BaseModel.query(function(){}, "SELECT cdb_cartodbfytable('"+ CONFIG.tweets_table_name +"')");
-    }
-    
-	
-    
+		if (CONFIG.cartodb_auth_config.multiUser=="true"){
+			l.debug('Multiuser account detected');
+			BaseModel.query(function(){}, "SELECT cdb_cartodbfytable('" + CONFIG.cartodb_auth_config.user + "','"+ CONFIG.tweets_table_name +"')");
+		}
+		else{
+			BaseModel.query(function(){}, "SELECT cdb_cartodbfytable('"+ CONFIG.tweets_table_name +"')");
+		}
 		callback(err, data);
 	}, sql);
 }
