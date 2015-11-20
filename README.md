@@ -23,6 +23,7 @@ Once you have your credentials, just run:
 
 ```bash
 docker run \
+    -e HASHTAGS=<yourhashtag> \
     -e TWITTER_CONSUMER_KEY=<your_twitter_consumer_key> \
     -e TWITTER_CONSUMER_SECRET=<your_twitter_consumer_secret> \
     -e TWITTER_TOKEN_KEY=<your_twitter_token_key> \
@@ -33,7 +34,20 @@ docker run \
  -it "geographica/cartotweets"
 ```
 
-Note that you need to pass the credentials from the previous steps.
+If you want to use a location as filter, for example filter tweets at San Francisco:
+```bash
+docker run \
+    -e LOCATIONS=-122.75,36.8,-121.75,37.8 \
+    -e TWITTER_CONSUMER_KEY=<your_twitter_consumer_key> \
+    -e TWITTER_CONSUMER_SECRET=<your_twitter_consumer_secret> \
+    -e TWITTER_TOKEN_KEY=<your_twitter_token_key> \
+    -e TWITTER_TOKEN_SECRET=<your_twitter_token_secret> \
+    -e CARTODB_USER=<your_cartodb_user> \
+    -e CARTODB_APIKEY=<your_cartodb_apikey> \
+    -e CARTODB_MULTIUSER_ACCOUNT=false
+ -it "geographica/cartotweets"
+```
+
 
 I know, that's a huge command to write by hand in the console, filling parameter by parameter... And to make it worse, those are not all options that you can pass to the docker container.
 

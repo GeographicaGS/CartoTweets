@@ -80,7 +80,7 @@ db.init(function(err){
 
     ts.startStream(function(tweet) {
         // If there is a locations filter, then ignore tweets without valid coordinates
-        if (!locations || hasCoordinates(tweet)) {
+        if (hasCoordinates(tweet)) {
             //The hashtags AND location filter IS INDEED A OR FILTER!! in the stream API..
             //so we have to filter hashtags programatically:
             if (tags_array.length === 0 || hasHashTags(tweet, tags_array)) {
