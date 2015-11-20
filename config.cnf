@@ -1,5 +1,5 @@
 # Hashtags: comma-separated list
-hashtags=díadelniño
+hashtags=
 
 # Bounding-box. Note: Only tweets with a valid location are inserted, except
 # when location parameter is empty, in which case all tweets are processed.
@@ -30,4 +30,3 @@ twitter_token_secret=
 # CartoDB auth config:
 cartodb_user=
 cartodb_apikey=
-

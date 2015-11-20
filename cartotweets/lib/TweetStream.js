@@ -9,8 +9,6 @@ function TweetStream(auth_config, stream_options){
     var twitter = new Twitter(auth_config);
     var stream_path = "statuses/filter";
 
-    l.info(stream_options);
-
     //Public methods
     this.startStream = function(callback){
         twitter.stream(stream_path, stream_options, function(stream) {
