@@ -10,6 +10,9 @@
         "log4js": "~0.6.26",
         "cartodb": "~0.2.1"
     },
+    "scripts": {
+        "start": "./bin/start"
+    },
     "private": true,
     "license": "MIT"
 }

@@ -105,7 +105,16 @@ TwitterModel.prototype.createTable = function(callback) {
 				tweet_retweeted BOOLEAN\
 			);";
 	BaseModel.query(function(err, data){
-		BaseModel.query(function(){}, "SELECT cdb_cartodbfytable('"+ CONFIG.tweets_table_name +"')");
+    if (CONFIG.cartodb_auth_config.multiUser=="true"){
+      l.debug('Multiuser account detected');
+      BaseModel.query(function(){}, "SELECT cdb_cartodbfytable('" + CONFIG.cartodb_auth_config.user + "','"+ CONFIG.tweets_table_name +"')");  
+    }
+    else{
+      BaseModel.query(function(){}, "SELECT cdb_cartodbfytable('"+ CONFIG.tweets_table_name +"')");
+    }
+    
+	
+    
 		callback(err, data);
 	}, sql);
 }

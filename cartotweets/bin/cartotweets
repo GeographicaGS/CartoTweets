@@ -53,32 +53,55 @@ db.init(function(err){
     //Start Stream API
     var i=0;
     var buffer = [];
+
+    function addTobuffer(tweet){
+        buffer.push(tweet);
+        if (buffer.length >= CONFIG.buffer_size) {
+            bufferFlush();
+        }
+    }
+
+    function bufferFlush(){
+        if (!buffer.length){
+            return;
+        }
+
+        var tweet_array = buffer;
+        buffer = [];
+
+        db.TwitterModel.addTweets(tweet_array, function(err, data){
+            if(err) {
+                l.error(err);
+            }
+            i = i + tweet_array.length;
+            l.debug('%d tweets inserted so far', i);
+        });
+    }
+
     ts.startStream(function(tweet) {
         // If there is a locations filter, then ignore tweets without valid coordinates
         if (!locations || hasCoordinates(tweet)) {
             //The hashtags AND location filter IS INDEED A OR FILTER!! in the stream API..
             //so we have to filter hashtags programatically:
             if (tags_array.length === 0 || hasHashTags(tweet, tags_array)) {
-                buffer.push(tweet);
-                if (buffer.length >= CONFIG.buffer_size) {
-                    var tweet_array = buffer;
-                    buffer = [];
-                    db.TwitterModel.addTweets(tweet_array, function(err, data){
-                        if(err) {
-                            l.error(err);
-                        }
-                        i = i + tweet_array.length;
-                        l.info('%d tweets inserted so far', i);
-                    });
-                }
+                addTobuffer(tweet);
             }
         }
     });
+
+    // flush the buffer each 5 seconds
+    setInterval(bufferFlush,5* 1000);
 });
 
-var hasHashTags = function(tweet, tags_array) {
-    var hashtags = tweet.entities.hashtags;
 
+
+var hasHashTags = function(tweet, tags_array) {
+    if (!tweet.hasOwnProperty('entities') || !tweet.entities.hasOwnProperty('hashtags')){
+        return false;
+    }
+    
+    var hashtags = tweet.entities.hashtags;
+    
     for (i in hashtags) {
         if (tags_array.indexOf(hashtags[i].text.toLowerCase()) !== -1) {
             return true;

@@ -14,7 +14,13 @@ db.init(function(err){
 
     db.TwitterModel.createTable(function(err, data){
         if (err) {
-            l.info(err);
+            if (err == '{"error":["relation \\"' + CONFIG.tweets_table_name + '\\" already exists"]}'){
+                l.debug('Table already created');
+            }
+            else{
+                l.info(err);
+            }
+           
         } else {
             l.info("Table " + CONFIG.tweets_table_name + " created on CartoDB.");
         }

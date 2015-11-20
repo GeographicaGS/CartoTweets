@@ -14,6 +14,9 @@ export TWEETER_TOKEN_SECRET=${TWEETER_TOKEN_SECRET:-""}
 
 export CARTODB_USER=${CARTODB_USER:-""}
 export CARTODB_APIKEY=${CARTODB_APIKEY:-""}
+export CARTODB_APIKEY=${CARTODB_APIKEY:-""}
 
-/app/bin/cdb_install
-/app/bin/cartotweets --hashtags=$HASHTAGS --locations=$LOCATIONS
+export CARTODB_MULTIUSER_ACCOUNT=${CARTODB_MULTIUSER_ACCOUNT:-"false"}
+
+./bin/cdb_install
+./bin/cartotweets --hashtags=$HASHTAGS --locations=$LOCATIONS

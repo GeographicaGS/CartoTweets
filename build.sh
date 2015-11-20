@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t "cartotweets" .
+docker build -t "geographica/cartotweets" cartotweets

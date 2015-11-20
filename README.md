@@ -19,13 +19,7 @@ First you need:
 
  There you'll have a **Application Settins** block, which corresponds to the **TWITTER_CONSUMER** *Key* and *Secret* strings, and **Your Access Token** block with the **TWITTER_TOKEN** *key* and *Secret* strings. That's all you need to connect your app to the Twitter API.
 
-Once you have your credentials, just build the docker:
-
-```bash
-docker build -t "cartotweets" .
-```
-
-And then run it passing these globals with your *Keys* and *Secrets*:
+Once you have your credentials, just run:
 
 ```bash
 docker run \
@@ -35,8 +29,11 @@ docker run \
     -e TWITTER_TOKEN_SECRET=<your_twitter_token_secret> \
     -e CARTODB_USER=<your_cartodb_user> \
     -e CARTODB_APIKEY=<your_cartodb_apikey> \
- -it "cartotweets"
+    -e CARTODB_MULTIUSER_ACCOUNT=false
+ -it "geographica/cartotweets"
 ```
+
+Note that you need to pass the credentials from the previous steps.
 
 I know, that's a huge command to write by hand in the console, filling parameter by parameter... And to make it worse, those are not all options that you can pass to the docker container.
 

@@ -1,5 +1,5 @@
 # Hashtags: comma-separated list
-hashtags=
+hashtags=díadelniño
 
 # Bounding-box. Note: Only tweets with a valid location are inserted, except
 # when location parameter is empty, in which case all tweets are processed.
@@ -9,13 +9,16 @@ hashtags=
 locations="-180,-90,180,90"
 
 # ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF
-log_level=DEBUG
+log_level=INFO
 
 # Number of tweets for batch DB insertions
 buffer_size=100
 
 # Table name on CartoDB
-cartodb_tablename=tweets
+cartodb_tablename=cartotweets
+
+# Multiuser account
+cartodb_multiuser_account=false
 
 # Twitter auth config:
 twitter_consumer_key=

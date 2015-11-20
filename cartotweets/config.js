@@ -12,8 +12,10 @@ config = {
 
     cartodb_auth_config : {
         user: process.env.CARTODB_USER,
-        apiKey: process.env.CARTODB_APIKEY
+        apiKey: process.env.CARTODB_APIKEY,
+        multiUser: process.env.CARTODB_MULTIUSER_ACCOUNT
     }
+    
 }
 
 module.exports = config;
